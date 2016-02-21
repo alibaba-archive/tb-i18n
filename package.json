@@ -1,6 +1,6 @@
 {
   "name": "tb-i18n",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "I18n for teambition web.",
   "main": "index.js",
   "scripts": {
