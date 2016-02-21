@@ -1,0 +1,28 @@
+{
+  "name": "tb-i18n",
+  "version": "0.0.1",
+  "description": "I18n for teambition web.",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard && mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teambition/tb-i18n.git"
+  },
+  "keywords": [
+    "i18n",
+    "tb-i18n"
+  ],
+  "author": "suyu34",
+  "bugs": {
+    "url": "https://github.com/teambition/tb-i18n/issues"
+  },
+  "homepage": "https://github.com/teambition/tb-i18n#readme",
+  "devDependencies": {
+    "mocha": "^2.4.5",
+    "should": "^8.2.2",
+    "standard": "^6.0.7"
+  },
+  "license": "MIT"
+}
