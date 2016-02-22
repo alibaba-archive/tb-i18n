@@ -23,10 +23,10 @@
    * @param  {[Array]}  args       [Dynamic input values]
    * @return {[string]}            [Result]
    * e.g.
-   * 	orderReplace('I am &2. I come from &1.', '&', ['CQ', 'suyu34'])
+   * 	indexReplace('I am &2. I come from &1.', '&', ['CQ', 'suyu34'])
    * 	-> 'I am suyu34. I come from CQ.'
    */
-  function orderReplace (transition, key, args) {
+  function indexReplace (transition, key, args) {
     for (var i = 0, len = args.length; i < len; i++) {
       var argValue = args[i]
       var argReplace = key + (i + 1) + ''
@@ -42,7 +42,7 @@
    * @param  {[Array]} args        [Dynamic input values]
    * @return {[string]}            [Result]
    * e.g.
-   * 	orderReplace('I am &0. I come from &0.', '&', ['suyu34', 'CQ'])
+   * 	zeroReplace('I am &0. I come from &0.', '&', ['suyu34', 'CQ'])
    * 	-> 'I am suyu34. I come from CQ.'
    */
   function zeroReplace (transition, key, args) {
@@ -136,7 +136,7 @@
     },
     privateTranslate: function (value, key, args) {
       if (value) {
-        value = orderReplace(value, this.replaceKey, args)
+        value = indexReplace(value, this.replaceKey, args)
         value = zeroReplace(value, this.replaceKey, args)
         value = replaceAll(value, this.emptyKey, '')
         return value
