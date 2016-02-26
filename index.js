@@ -6,7 +6,7 @@
    * @param  {[string]} value  [Value to insert]
    * @return {[string]}        [Result]
    * e.g.
-   *   replaceAll('&0abcd&0', '&0', '_')
+   *   replaceAll('%sabcd%s', '%s', '_')
    *   -> '_abcd_'
    */
   function replaceAll (string, key, value) {
@@ -23,7 +23,7 @@
    * @param  {[Array]}  args       [Dynamic input values]
    * @return {[string]}            [Result]
    * e.g.
-   * 	indexReplace('I am &2. I come from &1.', '&', ['CQ', 'suyu34'])
+   * 	indexReplace('I am %2. I come from %1.', '%', ['CQ', 'suyu34'])
    * 	-> 'I am suyu34. I come from CQ.'
    */
   function indexReplace (transition, key, args) {
@@ -42,13 +42,13 @@
    * @param  {[Array]} args        [Dynamic input values]
    * @return {[string]}            [Result]
    * e.g.
-   * 	zeroReplace('I am &0. I come from &0.', '&', ['suyu34', 'CQ'])
+   * 	zeroReplace('I am %s. I come from %s.', '%', ['suyu34', 'CQ'])
    * 	-> 'I am suyu34. I come from CQ.'
    */
   function zeroReplace (transition, key, args) {
     if (!args && !args.length) return transition
 
-    var replaceKey = key + '0'
+    var replaceKey = key + 's'
     while (~transition.indexOf(replaceKey) && args.length) {
       transition = transition.replace(replaceKey, args.shift())
     }
@@ -58,7 +58,7 @@
   module.exports = {
     language: 'en',
     defaultLanguage: 'en',
-    replaceKey: '&',
+    replaceKey: '%',
     emptyKey: '&empty;',
     localesSet: {},
 

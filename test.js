@@ -6,15 +6,15 @@ var it = global.it
 
 var localesEN = {
   'key1': 'It is normal value.',
-  'key2': 'I am &0.',
-  'key3': 'I am &1 and come from &2.',
-  'key4': 'I am &0 and come from &0.'
+  'key2': 'I am %s.',
+  'key3': 'I am %1 and come from %2.',
+  'key4': 'I am %s and come from %s.'
 }
 var localesZH = {
   'key1': '这是一个普通值。',
-  'key2': '我是&0。',
-  'key3': '我是&1，来自&2。',
-  'key4': '我是&0，来自&0。'
+  'key2': '我是%s。',
+  'key3': '我是%1，来自%2。',
+  'key4': '我是%s，来自%s。'
 }
 
 i18n.setLocales('en', localesEN)
