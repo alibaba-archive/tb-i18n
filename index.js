@@ -127,18 +127,17 @@
     privateGet: function (key, language, args) {
       var locales = this.getLocales(language)
       var defaultLocales = this.getLocales(this.defaultLanguage)
-      var value = locales[key] || defaultLocales[key] || ''
+      var value = locales[key] || defaultLocales[key] || key
       if (args.length) {
-        return this.privateTranslate(value, key, args)
-      } else {
-        return value || key
+        value = this.privateTranslate(value, key, args)
       }
+      value = replaceAll(value, this.emptyKey, '')
+      return value
     },
     privateTranslate: function (value, key, args) {
       if (value) {
         value = indexReplace(value, this.replaceKey, args)
         value = zeroReplace(value, this.replaceKey, args)
-        value = replaceAll(value, this.emptyKey, '')
         return value
       } else {
         return key
