@@ -55,6 +55,35 @@
     return transition
   }
 
+  /**
+  * Parse the accept-language to array
+  * @param  header: string  The accept-language from browser
+  * @return string[]
+  * e.g.
+  * 	getAcceptedLanguagesFromHeader('zh-CN,zh;q=0.8,en;q=0.6')
+  * 	-> ['zh-CN', 'zh', 'en']
+   */
+  function getAcceptedLanguagesFromHeader (header) {
+    var languages = header.split(',')
+    var preferences = {}
+    return languages.map(function (item) {
+      var preferenceParts = item.trim().split(';q=')
+      if (preferenceParts.length < 2) {
+        preferenceParts[1] = 1
+      } else {
+        var quality = +preferenceParts[1]
+        preferenceParts[1] = quality || 0
+      }
+      preferences[preferenceParts[0]] = preferenceParts[1]
+
+      return preferenceParts[0]
+    }).filter(function (lang) {
+      return preferences[lang] > 0
+    }).sort(function (a, b) {
+      return preferences[b] - preferences[a]
+    })
+  }
+
   module.exports = {
     language: 'en',
     defaultLanguage: 'en',
@@ -73,6 +102,23 @@
       this.defaultLanguage = defaultLanguage
     },
 
+    guessLanguage: function (accepts, languages, fallMap) {
+      if (!fallMap) fallMap = {}
+      var acceptedLanguages = getAcceptedLanguagesFromHeader(accepts)
+
+      for (var i = 0, len = acceptedLanguages.length; i < len; i++) {
+        var lang = acceptedLanguages[i]
+        var lr = lang.split('-', 2)
+        var parentLang = lr[0]
+        var fallLang = fallMap[lang]
+
+        if (~languages.indexOf(lang)) return lang
+        if (~languages.indexOf(fallLang)) return fallLang
+        if (~languages.indexOf(parentLang)) return parentLang
+      }
+
+      return this.defaultLanguage
+    },
     getLanguage: function () {
       return this.language
     },

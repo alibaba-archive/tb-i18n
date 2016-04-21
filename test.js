@@ -70,3 +70,20 @@ describe('test tb-i18n', function () {
     i18n.getLocales('zh').should.eql(localesZH)
   })
 })
+
+describe('help methods', function () {
+  it('guessLanguage normal', function () {
+    var languages = ['zh', 'zh-CN']
+    i18n.guessLanguage('zh-CN,zh;q=0.8,en;q=0.6', languages).should.eql('zh-CN')
+  })
+  it('guessLanguage quality', function () {
+    var languages = ['zh', 'zh-CN']
+    i18n.guessLanguage('zh-CN,zh;q=1.8,en;q=0.6', languages).should.eql('zh')
+  })
+  it('guessLanguage fallback', function () {
+    var languages = ['zh', 'zh_CN']
+    var switchMap = {}
+    switchMap['zh-CN'] = 'zh_CN'
+    i18n.guessLanguage('zh-CN,zh;q=0.8,en;q=0.6', languages, switchMap).should.eql('zh_CN')
+  })
+})
