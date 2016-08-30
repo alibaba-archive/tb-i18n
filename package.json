@@ -3,6 +3,7 @@
   "version": "0.0.5",
   "description": "I18n for teambition web.",
   "main": "index.js",
+  "typings": "i18n.d.ts",
   "scripts": {
     "test": "standard && mocha test"
   },
